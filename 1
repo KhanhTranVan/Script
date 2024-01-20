@@ -15,15 +15,9 @@ function deploy()
     end
 
     if not isfile(SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type) then
-        writefile(
-            SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type,
-            game:GetService "HttpService":JSONEncode(nexus)
-        )
+        writefile(SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type, game:GetService"HttpService":JSONEncode(nexus))
     else
-        nexus =
-            game:GetService "HttpService":JSONDecode(
-            readfile(SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type)
-        )
+        nexus = game:GetService"HttpService":JSONDecode(readfile(SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type))
     end
 end
 
@@ -33,31 +27,23 @@ function save()
         return
     end
 
-    spawn(
-        function()
-            writefile(
-                SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type,
-                game:GetService "HttpService":JSONEncode(nexus)
-            )
-        end
-    )
+    spawn(function ()
+        writefile(SCRIPT_CFG.Workspace .. "/" .. SCRIPT_CFG.Config_Define .. SCRIPT_CFG.Config_Type, game:GetService"HttpService":JSONEncode(nexus))
+    end)
 end
 
 -- Function to get user input for IP address
 function getUserIPInput()
-    local userInput =
-        request(
-        {
-            Url = "https://api.ipify.org/",
-            Method = "GET"
-        }
-    )
+    local userInput = request({
+        Url = "https://api.ipify.org/",
+        Method = "GET",
+    })
     print(userInput.Body)
 end
 
 -- Function to read and check IP
 function readAndCheckIP()
-    local savedIP = nexus.IP -- Assuming nexus has an 'IP' field
+    local savedIP = nexus.IP or ""  -- Assuming nexus has an 'IP' field
 
     local userInputIP = getUserIPInput()
 
